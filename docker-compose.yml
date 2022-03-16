@@ -6,7 +6,7 @@ services:
     environment:
       - REGISTRY_HTTP_SECRET=CHANGEME
     volumes:
-      - registry_data:/storage
+      - ./data/registry_data:/storage
       - ./config/registry/:/etc/registry/:ro
   registryctl:
     image: docker.io/bitnami/harbor-registryctl:2
@@ -15,7 +15,7 @@ services:
       - JOBSERVICE_SECRET=CHANGEME
       - REGISTRY_HTTP_SECRET=CHANGEME
     volumes:
-      - registry_data:/storage
+      - ./data/registry_data:/storage
       - ./config/registry/:/etc/registry/:ro
       - ./config/registryctl/config.yml:/etc/registryctl/config.yml:ro
   postgresql:
@@ -66,7 +66,7 @@ services:
       - READ_ONLY=false
       - RELOAD_KEY=
     volumes:
-      - core_data:/data
+      - ./data/core_data:/data
       - ./config/core/app.conf:/etc/core/app.conf:ro
       - ./config/core/private_key.pem:/etc/core/private_key.pem:ro
   portal:
@@ -88,7 +88,7 @@ services:
       - REGISTRY_CREDENTIAL_USERNAME=harbor_registry_user
       - REGISTRY_CREDENTIAL_PASSWORD=harbor_registry_password
     volumes:
-      - jobservice_data:/var/log/jobs
+      - ./data/jobservice_data:/var/log/jobs
       - ./config/jobservice/config.yml:/etc/jobservice/config.yml:ro
   redis:
     image: docker.io/bitnami/redis:6.0
@@ -121,15 +121,15 @@ services:
       - ALLOW_OVERWRITE=true
       - INDEX_LIMIT=0
     volumes:
-      - chartmuseum_data:/bitnami/data
-volumes:
-  registry_data:
-    driver: local
-  core_data:
-    driver: local
-  jobservice_data:
-    driver: local
-  postgresql_data:
-    driver: local
-  chartmuseum_data:
-    driver: local
+      - ./data/chartmuseum_data:/bitnami/data
+# volumes:
+#  ./data/registry_data:
+#    driver: local
+  # ./data/core_data:
+  #   driver: local
+  # ./data/jobservice_data:
+  #   driver: local
+  # postgresql_data:
+  #   driver: local
+  # ./data/chartmuseum_data:
+  #   driver: local
