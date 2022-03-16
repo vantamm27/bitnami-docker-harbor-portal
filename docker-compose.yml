@@ -25,7 +25,7 @@ services:
       - POSTGRESQL_PASSWORD=bitnami
       - POSTGRESQL_DATABASE=registry
     volumes:
-      - postgresql_data:/bitnami/postgresql
+      - ./data/postgresql_data:/bitnami/postgresql
   core:
     image: docker.io/bitnami/harbor-core:2
     container_name: harbor-core
@@ -129,7 +129,7 @@ services:
   #   driver: local
   # ./data/jobservice_data:
   #   driver: local
-  # postgresql_data:
+  # ./data/postgresql_data:
   #   driver: local
   # ./data/chartmuseum_data:
   #   driver: local
